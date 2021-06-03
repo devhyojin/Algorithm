@@ -1,7 +1,11 @@
-from sys import stdin
-N = int(stdin.readline())
-max_five = N // 5
-for i in range(max_five, -1):
-    if not (N - 5*i) % 3:
-        print(i + (N - 5*i)//3)
+N = int(input())
+ans = 0
+for i in range(N//5, -1, -1):
+    temp = N - 5 * i
+    if not (temp) % 3:
+        ans = i + (temp)//3
         break
+if ans:
+    print(ans)
+else:
+    print(-1)
