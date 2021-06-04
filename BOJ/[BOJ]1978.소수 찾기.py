@@ -7,7 +7,6 @@ for i in range(2, 1001):
             checkPrime[j] = False
 
 T = int(input())
-
 info = list(map(int, stdin.readline().split()))
 ans = 0
 for i in info:
