@@ -23,5 +23,5 @@ def solution(progresses, speeds):
             # 100퍼센트를 넘기기 위해 필요한 최소 일 수를 추가한다.
             answer.append([-((p-100)//s), 1])
         else:
-            answer[-1,1] += 1
-    return [q[1] for q in Q]
+            answer[-1][1] += 1
+    return [a[1] for a in answer]
