@@ -23,5 +23,5 @@ def solution(begin, target, words):
             if not visited[idx] and calc(cur_word, word):
                 visited[idx] = 1
                 path.append(word)
-    answer += 1
 
+        answer += 1
