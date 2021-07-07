@@ -3,6 +3,7 @@ from collections import deque
 
 di = (-1, 1, 2, 2, -1, 1, -2, -2 )
 dj = (2, 2, -1, 1, -2, -2, -1, 1)
+
 def bfs(si, sj, ei, ej):
     queue = deque()
     queue.append((si,sj))
@@ -12,7 +13,7 @@ def bfs(si, sj, ei, ej):
             return board[ci][cj]
         for d in range(8):
             ni, nj = ci+di[d], cj+dj[d]
-            if 0<= ni < l and 0 <= nj < l:
+            if 0<= ni < l and 0 <= nj < l and not board[ni][nj]:
                 queue.append((ni,nj))
                 board[ni][nj] = board[ci][cj] + 1
 
@@ -23,8 +24,10 @@ for _ in range(n):
     next_i, next_j = map(int, stdin.readline().split())
     board = [[0 for _ in range(l)] for _ in range(l)]
     ans = 0
-    if cur_i != next_i and cur_j != next_j:
+    if cur_i != next_i or cur_j != next_j:
         ans = bfs(cur_i, cur_j, next_i, next_j)
     print(ans)
+
+
 
 
