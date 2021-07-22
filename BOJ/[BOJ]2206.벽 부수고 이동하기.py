@@ -5,36 +5,27 @@ from collections import deque
 dr=(-1,0,1,0)
 dc=(0,1,0,-1)
 
-def bfs(r, c):
-    change = 1
+def bfs():
+    visited = [[[0,0] for _ in range(m)] for _ in range(n)]
     queue = deque()
-    queue.append((r,c))
-    visited[r][c] = 1
+    queue.append((0,0,1))
+    visited[0][0][1] = 1
     while queue:
-        cr, cc = queue.popleft()
+        cr, cc, flag = queue.popleft()
+        if cr == n-1 and cc == m-1:
+            return visited[cr][cc][flag]
         for dir in range(4):
             nr, nc = cr+dr[dir], cc+dc[dir]
             if nr<0 or nr>=n or nc<0 or nc>=m:
                 continue
-            if board[nr][nc]=='0' and not visited[nr][nc]:
-                visited[nr][nc] = visited[cr][cc] + 1
-                queue.append((nr, nc))
-        if not queue:
-            for dir in range(4):
-                nr, nc = cr + dr[dir], cc + dc[dir]
-                if nr < 0 or nr >= n or nc < 0 or nc >= m:
-                    continue
-                if not visited[nr][nc] and change:
-                    change -= 1
-                    visited[nr][nc] = visited[cr][cc] + 1
-                    queue.append((nr, nc))
-
+            if board[nr][nc]==1 and flag==1:
+                queue.append((nr, nc, 0))
+                visited[nr][nc][0] = visited[cr][cc][1] + 1
+            elif board[nr][nc]==0 and visited[nr][nc][flag]==0:
+                queue.append((nr, nc, flag))
+                visited[nr][nc][flag] = visited[cr][cc][flag] + 1
+    return -1
 
 n,m = map(int, stdin.readline().split())
-board = [stdin.readline().rstrip() for _ in range(n)]
-visited = [[0 for _ in range(m)] for _ in range(n)]
-bfs(n-1,m-1)
-if visited[0][0]:
-    print(visited[0][0])
-else:
-    print(-1)
+board = [list(map(int, stdin.readline().rstrip())) for _ in range(n)]
+print(bfs())
