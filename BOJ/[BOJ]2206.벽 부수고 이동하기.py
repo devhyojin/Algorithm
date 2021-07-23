@@ -1,4 +1,3 @@
-#벽 부수는 방식 수정 필요
 from sys import stdin
 from collections import deque
 
