@@ -1,6 +1,5 @@
 #sol1
 from sys import stdin
-
 def sol():
     s, e = 0, n - 1
     leng = 2 * n
